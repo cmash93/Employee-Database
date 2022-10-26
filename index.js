@@ -32,7 +32,8 @@ const mainMenu = () => {
             "Add Department",
             "Add Role",
             "Add Employee",
-            "Update Employee"
+            "Update Employee",
+            "Quit"
            ]
         }
     ])
@@ -57,11 +58,19 @@ const viewDepartments = () => {
 }
 
 const viewRoles = () => {
-
+    db.query('SELECT * FROM roles', (err, res) => {
+        if (err) throw err;
+        console.table(res)
+        mainMenu();
+    })  
 }
 
 const viewEmployees = () => {
-
+    db.query('SELECT * FROM employees', (err, res) => {
+        if (err) throw err;
+        console.table(res)
+        mainMenu();
+    })  
 }
 
 const addDepartment = () => {
@@ -69,7 +78,7 @@ const addDepartment = () => {
     .prompt([
         {
             type: "input",
-            name: "addDept",
+            name: "dept_name",
             // name these after the columns that the data will go into
             message: "MESSAGE"
         }
@@ -85,13 +94,74 @@ const addDepartment = () => {
 }
 
 const addRole = () => {
-
+    inquirer
+    .prompt([
+        {
+            type: "input",
+            name: "title",
+            // name these after the columns that the data will go into
+            message: "MESSAGE"
+        },
+        {
+            type: "input",
+            name: "salary",
+            // name these after the columns that the data will go into
+            message: "MESSAGE"
+        },
+        {
+            type: "input",
+            name: "department_name",
+            // name these after the columns that the data will go into
+            message: "MESSAGE"
+        }
+    ])
 }
 
 const addEmployee = () => {
-
+    inquirer
+    .prompt([
+        {
+            type: "input",
+            name: "first_name",
+            // name these after the columns that the data will go into
+            message: "MESSAGE"
+        },
+        {
+            type: "input",
+            name: "last_name",
+            // name these after the columns that the data will go into
+            message: "MESSAGE"
+        },
+        {
+            type: "input",
+            name: "title",
+            // name these after the columns that the data will go into
+            message: "MESSAGE"
+        },
+        {
+            type: "input",
+            name: "manager_id",
+            // name these after the columns that the data will go into
+            message: "MESSAGE"
+        }
+    ])
 }
 
 const updateEmployee = () => {
     // update mysql - look it up 
+    inquirer
+    .prompt([
+        {
+            type: "input",
+            name: "employee_id",
+            // name these after the columns that the data will go into
+            message: "MESSAGE"
+        },
+        {
+            type: "input",
+            name: "role_id",
+            // name these after the columns that the data will go into
+            message: "MESSAGE"
+        }
+    ])
 }
